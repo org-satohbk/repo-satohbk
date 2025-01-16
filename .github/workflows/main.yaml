@@ -28,10 +28,12 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: "arn:aws:iam::992382697155:role/satohbkGithubOIDCRole2" #change to reflect your IAM role’s ARN
-          role-session-name: GitHub_to_AWS_via_FederatedOIDC2
+          role-to-assume: "arn:aws:iam::992382697155:role/satohbkGithubOIDCRole" #change to reflect your IAM role’s ARN
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
         run: |
           aws sts get-caller-identity
+          echo "---------------"
+          curl -s -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}" | jq '.value | split(".") | .[0],.[1] | @base64d | fromjson'
