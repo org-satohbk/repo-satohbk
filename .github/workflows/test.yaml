@@ -1,4 +1,4 @@
-name: Deploy AWS infrastrucute
+name: Deploy AWS infrastrucute2
 on:
   push:
     paths:
