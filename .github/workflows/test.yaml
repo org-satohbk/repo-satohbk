@@ -19,7 +19,7 @@ jobs:
 
     #runs-on: [self-hosted, sg-kubernetes, Linux]
     env:
-      AWS_ROLE_ARN: arn:aws:iam::992382697155:role/satohbkGithubOIDCRole
+      AWS_ROLE_ARN: arn:aws:iam::992382697155:role/satohbkGithubOIDCRole2
 
     steps:
       - uses: aws-actions/configure-aws-credentials@v4
