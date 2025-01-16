@@ -25,6 +25,10 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
+      - name: Check Token
+        run: |
+          echo "---------------"
+          curl -s -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}" | jq '.value | split(".") | .[0],.[1] | @base64d | fromjson'
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -35,5 +39,4 @@ jobs:
       - name: Sts GetCallerIdentity
         run: |
           aws sts get-caller-identity
-          echo "---------------"
-          curl -s -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}" | jq '.value | split(".") | .[0],.[1] | @base64d | fromjson'
+
