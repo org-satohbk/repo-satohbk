@@ -1,8 +1,13 @@
 name: Deploy AWS infrastrucute2
+#on:
+#  push:
+#    paths:
+#      - "backend/aws/**"
 on:
   push:
-    paths:
-      - "backend/aws/**"
+    branches: [ sub-1 ]
+  pull_request:
+    branches: [ sub-1 ]
 permissions:
   id-token: write
   contents: read
